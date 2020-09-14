@@ -41,7 +41,7 @@ router.post('/login',async(req,res)=>{
         const token = jwt.sign({_id:usernameExists._id},secret);
         res.header('auth-token',token).json({message:token})
     }else{
-        res.status(404).json({failed:"Username or Password is wrong"});
+        res.status(404).json({message:"Username or Password is incorrect"});
     }
 
 })
