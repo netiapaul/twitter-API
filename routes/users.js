@@ -4,10 +4,24 @@ const userModel = require('../models/user-models');
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
 const secret = process.env.JWT_SECRET;
+const sgMail = require('@sendgrid/mail');
+
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+const msg = {
+    to: 'netiapaul23@gmail.com',
+    from: 'netiapaul23@gmail.com',
+    subject: 'Sending with Twilio SendGrid is Fun',
+    text: 'and easy to do anywhere, even with Node.js',
+    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+  };
+
 
 // REGISTER NEW USERS
 router.post('/users',async(req,res)=>{
-    res.type('json')
+    res.type('json');
+    
 
     const emailExists = await userModel.findOne({email:req.body.email});
     // const emailExists = false;
@@ -23,7 +37,7 @@ router.post('/users',async(req,res)=>{
         });
     
         newUser.save()
-        .then(data => res.status(200).json(data),console.log(newUser))
+        .then(data => res.status(200).json(data),console.log(newUser),sgMail.send(msg))
         .catch(error => res.status(404).json({message:error}));
     };
 });
