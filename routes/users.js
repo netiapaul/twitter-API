@@ -18,7 +18,7 @@ router.post('/users',async(req,res)=>{
     const msg = {
         to: req.body.email,
         from: 'netiapaul23@gmail.com',
-        subject: 'Sending with Twilio SendGrid is Fun',
+        subject: 'Twitter Clone APP',
         text: 'and easy to do anywhere, even with Node.js',
         html: '<strong>and easy to do anywhere, even with Node.js</strong>',
       };

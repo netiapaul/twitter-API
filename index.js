@@ -7,6 +7,7 @@ const port = process.env.PORT || 4000;
 const mongoose = require('mongoose');
 const URI = process.env.MONGO_URI;
 const userRoute = require('./routes/users');
+const postRoute = require('./routes/posts');
 
 // MIDDLEWARES 
 app.use(bodyParser.urlencoded({
@@ -21,6 +22,7 @@ mongoose.connect(URI,{ useNewUrlParser: true,useUnifiedTopology: true },()=>{
 
 // ROUTES
 app.use('/api',cors(),userRoute);
+app.use('/api',postRoute);
    
 //  HOST APPLICATION
 app.listen(port,()=>{
